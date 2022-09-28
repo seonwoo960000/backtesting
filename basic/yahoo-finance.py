@@ -7,7 +7,6 @@ def getInformation():
     multiple_data = yf.download(['AAPL', 'MU'], start='2019-01-01')
 
 
-
 def main():
     getInformation()
 
