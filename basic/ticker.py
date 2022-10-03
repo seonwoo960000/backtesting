@@ -45,22 +45,22 @@ class TickerGroup:
         self.tickers = tickers
         self.names = set()
         for t in tickers:
-            self.names.add(t['ticker'].ticker_code)
+            self.names.add(t['name'].ticker_code)
 
     def get_ticker_names(self):
         return self.names
 
     def get_yesterday_total_price(self):
         yesterday = datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')
-        return reduce(lambda x, y: x + y, [t['count'] * t['ticker'].get_close_price(yesterday) for t in self.tickers])
+        return reduce(lambda x, y: x + y, [t['count'] * t['name'].get_close_price(yesterday) for t in self.tickers])
 
 
 def test_ticker_group():
     apple = Ticker('AAPL', '2020-01-02')
     microsoft = Ticker('MSFT', '2020-01-02')
     ticker_group = TickerGroup([
-        {'ticker': apple, 'count': 10},
-        {'ticker': microsoft, 'count': 20}
+        {'name': apple, 'count': 10},
+        {'name': microsoft, 'count': 20}
     ])
     print(apple.get_close_price(datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')))
     print(microsoft.get_close_price(datetime.strftime(datetime.now() - timedelta(1), '%Y-%m-%d')))
